@@ -1,35 +1,11 @@
 /**
  * gamebai-server deno project
  */
-import Deck from "./deck.ts";
-import Card from "./card.ts";
+
+import Game from "./game.ts";
 
 const HOME_ROUTE = new URLPattern({ pathname: "/" });
 const WEB_SOCKET_ROUTE = new URLPattern({ pathname: "/websocket" });
-
-
-class Game {
-  player_hand: Card[];
-  deck: Deck;
-  socket: WebSocket;
-
-  constructor(socket: WebSocket) {
-    this.deck = new Deck();
-    this.player_hand = [];
-    this.socket = socket;
-  }
-
-  public dealCard() {
-    this.player_hand = this.deck.dealCards(13);
-    const responseObject = {
-      server_command: "CHIA_BAI",
-      data: this.player_hand
-    };
-    const json_response = JSON.stringify(responseObject);
-    this.socket.send(json_response);
-  }
-
-}
 
 Deno.serve({ hostname: "0.0.0.0", port: 8000 }, (req) => {
   const match_home_url = HOME_ROUTE.exec(req.url);
