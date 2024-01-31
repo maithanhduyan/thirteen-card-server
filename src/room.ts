@@ -3,7 +3,7 @@ import Player from "./player";
 
 export class PublicRoom {
 
-    name: string;
+    name!: string;
     player: Player;
     constructor() { }
 
@@ -13,8 +13,8 @@ export class PublicRoom {
 }
 
 export class GameRoom {
-    id: number;
-    players: Player[];
+    id: number | undefined;
+    players!: Player[];
 
     constructor() { }
 
