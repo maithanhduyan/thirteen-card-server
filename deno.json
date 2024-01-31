@@ -1,0 +1,8 @@
+{
+    "tasks": {
+        "start":"deno run --allow-net src/server.ts",
+        "build":"deno run -A src/server.ts build",
+        "dev": "deno run -A --watch src/server.ts"
+    },
+    "imports": {}
+}
