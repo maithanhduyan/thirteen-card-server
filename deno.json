@@ -4,5 +4,6 @@
         "build":"deno run -A src/server.ts build",
         "dev": "deno run -A --watch src/server.ts"
     },
-    "imports": {}
+    "imports": {},
+    "nodeModulesDir": true
 }
