@@ -1,5 +1,9 @@
+/**
+ * 
+*/
 import { generateRandomString } from "./utils.ts";
-class Player {
+
+export default class Player {
 
     password!: string;
     constructor(public id: string, public name: string, public username: string) {
@@ -19,5 +23,3 @@ class Player {
     }
 
 }
-
-export default Player;
