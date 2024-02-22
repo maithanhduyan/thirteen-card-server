@@ -2,7 +2,7 @@ import Card from "./card.ts";
 
 class Deck {
 
-    cards: Card[];
+    cards!: Card[];
 
     constructor() {
         this.cards = [];
@@ -14,8 +14,8 @@ class Deck {
         const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
         const ranks = ['3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace', '2'];
 
-        for (let suit of suits) {
-            for (let rank of ranks) {
+        for (const suit of suits) {
+            for (const rank of ranks) {
                 this.cards.push(new Card(rank, suit));
             }
         }

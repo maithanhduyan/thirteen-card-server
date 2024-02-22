@@ -5,21 +5,22 @@ import Deck from "./deck.ts";
 import Card from "./card.ts";
 
 class Game {
-    player_hand: Card[];
-    deck: Deck;
+    player_hand!: Card[];
+    deck!: Deck;
     socket!: WebSocket;
 
     constructor() {
         this.deck = new Deck();
         this.player_hand = [];
     }
-    
-    setSocket(socket:WebSocket){
+
+    setSocket(socket: WebSocket) {
         this.socket = socket;
         this.socket.onmessage = this.handleMessageReceived.bind(this);
     }
 
-    public dealCard() {
+    private dealCard() {
+        this.deck = new Deck();
         this.player_hand = this.deck.dealCards(13);
         const responseObject = {
             server_command: "CHIA_BAI",
@@ -33,7 +34,7 @@ class Game {
         console.log(event.data);
         switch (event.data) {
             case "ping": this.ping(); break;
-            case "CHIA_BAI": this.newGame(); break;
+            case "CHIA_BAI": this.dealCard(); break;
             case "JOIN": this.playerJoinRoom(); break;
             default: this.onErrors; break;
         }
@@ -43,15 +44,11 @@ class Game {
 
     }
 
-    private newGame() {
-        this.dealCard()
-    }
-
     private ping() {
         this.socket.send("pong")
     }
 
-    private onErrors(){
+    private onErrors() {
         this.socket.send(JSON.stringify("Not Found"))
     }
 }
